@@ -756,14 +756,46 @@ footer {
 		gap: 2.5rem;
 	}
 	
-	.process-content { 
-		flex-direction: column; 
-		height: auto; 
+	.process-content {
+		display: flex;
+		flex-direction: row;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+		gap: 1rem;
+		padding: 0 1.5rem;
+		height: auto;
 	}
-	.process-step { 
-		width: 100%; 
-		height: 300px !important; 
+	.process-content::-webkit-scrollbar {
+		display: none;
+	}
+	.process-step {
+		width: 85vw;
+		min-width: 280px;
+		height: 420px !important;
 		flex: none !important;
+		scroll-snap-align: center;
+		border-radius: 0;
+		margin-right: 0;
+	}
+	.process-step img {
+		opacity: 1;
+	}
+	/* scroll hint shadow on right edge */
+	.process-container {
+		position: relative;
+	}
+	.process-container::after {
+		content: "";
+		position: absolute;
+		top: calc(50% - 1.5rem);
+		right: 0;
+		width: 60px;
+		height: 60px;
+		background: linear-gradient(to left, rgba(5,5,5,0.9), transparent);
+		pointer-events: none;
+		z-index: 2;
 	}
 	.gallery-grid {
 		grid-template-columns: 1fr;
