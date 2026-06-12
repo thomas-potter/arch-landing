@@ -388,6 +388,9 @@ header::after {
 .process-header h2 {
 	font-size: 2.5rem;
 }
+.process-header p.scroll-hint {
+	display: none;
+}
 .process-content {
 	display: flex;
 	justify-content: space-between;
@@ -757,45 +760,67 @@ footer {
 	}
 	
 	.process-content {
-		display: flex;
-		flex-direction: row;
-		overflow-x: auto;
-		scroll-snap-type: x mandatory;
-		-webkit-overflow-scrolling: touch;
-		scrollbar-width: none;
-		gap: 1rem;
-		padding: 0 1.5rem;
+		display: block;
+		padding: 0 1.25rem;
 		height: auto;
 	}
-	.process-content::-webkit-scrollbar {
-		display: none;
-	}
 	.process-step {
-		width: 85vw;
-		min-width: 280px;
-		height: 420px !important;
+		position: sticky;
+		top: 80px;
+		width: 100%;
+		height: 55vh !important;
+		min-height: 380px;
 		flex: none !important;
-		scroll-snap-align: center;
+		margin-bottom: 35vh;
 		border-radius: 0;
-		margin-right: 0;
+		border: 1px solid var(--border-light);
+		background: var(--surface);
+		transform: perspective(1000px) rotateX(18deg) translateY(50px) scale(0.92);
+		opacity: 0;
+		transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+		box-shadow: 0 -20px 60px rgba(0,0,0,0.6);
+		overflow: hidden;
+	}
+	.process-step:nth-child(1) { z-index: 1; }
+	.process-step:nth-child(2) { z-index: 2; }
+	.process-step:nth-child(3) { z-index: 3; }
+	.process-step:nth-child(4) { z-index: 4; }
+	.process-step:nth-child(5) { z-index: 5; }
+
+	.process-step.is-visible {
+		transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
+		opacity: 1;
 	}
 	.process-step img {
 		opacity: 1;
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
 	}
-	/* scroll hint shadow on right edge */
-	.process-container {
-		position: relative;
+	.process-step .step-info {
+		padding: 2rem;
+		background: linear-gradient(transparent 10%, rgba(0,0,0,0.95) 60%);
 	}
-	.process-container::after {
-		content: "";
-		position: absolute;
-		top: calc(50% - 1.5rem);
-		right: 0;
-		width: 60px;
-		height: 60px;
-		background: linear-gradient(to left, rgba(5,5,5,0.9), transparent);
-		pointer-events: none;
-		z-index: 2;
+	.process-step .step-info h3 {
+		font-size: 1rem;
+		margin-bottom: 0.5rem;
+	}
+	.process-step .step-info p {
+		font-size: 1.25rem;
+	}
+	.process-header p.scroll-hint {
+		display: block;
+		margin-top: 1rem;
+		color: var(--accent);
+		font-size: 0.85rem;
+		font-weight: 700;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+		animation: pulseHint 2s ease-in-out infinite;
+	}
+	@keyframes pulseHint {
+		0%, 100% { opacity: 0.6; }
+		50% { opacity: 1; }
 	}
 	.gallery-grid {
 		grid-template-columns: 1fr;

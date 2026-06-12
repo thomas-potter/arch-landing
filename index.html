@@ -14,7 +14,7 @@
 			background-color: #050505;
 		}
 	</style>
-	<link rel="stylesheet" href="style.css?v=3" />
+	<link rel="stylesheet" href="style.css?v=4" />
 
 </head>
 <body>
@@ -95,6 +95,7 @@
 			<div class="process-header">
 				<h2>From Sketch to Final</h2>
 				<p>Explore each stage of the professional workflow.</p>
+				<p class="scroll-hint">↓ Scroll to reveal each step ↓</p>
 			</div>
 			<div class="process-content">
 				<div class="process-step">
@@ -337,6 +338,17 @@
 	</footer>
 
 	<script>
+		// ── PROCESS STEP REVEAL (mobile) ─────────────────────
+		const processSteps = document.querySelectorAll(".process-step");
+		const stepObserver = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add("is-visible");
+				}
+			});
+		}, { threshold: 0.15, rootMargin: "0px 0px -60px 0px" });
+		processSteps.forEach(step => stepObserver.observe(step));
+		
 		// ── FAQ ACCORDION ──────────────────────────────────────
 		const faqToggles = document.querySelectorAll(".faq-toggle");
 		faqToggles.forEach((toggle) => {
